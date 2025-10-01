@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>SHAVERMA</title>
+<link rel="stylesheet" href="styles.css">
+<link rel="preload" href="public/webgl_game/index.html" as="document">
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+</head>
+<body>
+  <div class="bg"></div>
+  <main class="container">
+    <header class="header">
+    </header>
+
+    <section class="game-viewport" role="region" aria-label="Игровое окно">
+      <div id="loadingOverlay" aria-live="polite" aria-busy="true">
+        <div class="loader">
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+        </div>
+        <div class="loading-text">Загрузка…</div>
+      </div>
+      <iframe
+        id="gameFrame"
+        title="SHAVERMA"
+        src="public/webgl_game/index.html"
+        loading="eager"
+        allow="fullscreen; autoplay; clipboard-read; clipboard-write; gamepad"
+        allowfullscreen
+        referrerpolicy="no-referrer"
+      ></iframe>
+
+      
+    </section>
+
+    <footer class="footer">
+    </footer>
+  </main>
+
+  <script src="scipt.js"></script>
+</body>
+</html>
+
+

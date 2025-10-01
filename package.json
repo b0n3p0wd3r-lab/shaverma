@@ -1,0 +1,16 @@
+{
+  "name": "clicker",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Frontend + Unity WebGL server for Render",
+  "scripts": {
+    "dev": "node server.js",
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^5.1.0"
+  },
+  "devDependencies": {}
+}
+
+

@@ -1,0 +1,151 @@
+/* Reset */
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  color: #ffffff;
+  background: #2a0a35;
+  overflow: hidden;
+}
+
+/* Fullscreen purple gradient background */
+.bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: radial-gradient(1200px 800px at 20% 10%, #6b2bd8 0%, rgba(107,43,216,0.4) 30%, transparent 60%),
+              radial-gradient(1000px 900px at 80% 80%, #b26cf0 0%, rgba(178,108,240,0.3) 30%, transparent 60%),
+              linear-gradient(160deg, #2d0e3b 0%, #3a0f4a 50%, #1f0b2a 100%);
+}
+
+.container {
+  min-height: 100dvh;
+  display: grid;
+  grid-template-rows: 0 1fr 0;
+  align-items: stretch;
+  justify-items: stretch;
+  gap: 0;
+  padding: 0;
+}
+
+.header { display: none; }
+.title { display: none; }
+.subtitle { display: none; }
+
+/* Plain game viewport enforcing mobile aspect ratio */
+.game-viewport {
+  width: 100vw;
+  height: 100dvh;
+  border-radius: 0;
+  overflow: hidden;
+  background: #000;
+  box-shadow: none;
+}
+
+.game-viewport iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+  background: #000;
+}
+
+/* Loading overlay */
+#loadingOverlay {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  gap: 16px;
+  background: radial-gradient(800px 600px at 50% 30%, rgba(107,43,216,0.3), rgba(0,0,0,0.9));
+  color: #fff;
+  z-index: 2;
+}
+
+.loader {
+  display: inline-flex;
+  gap: 10px;
+}
+
+.loader .dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #b26cf0;
+  animation: bounce 1.2s infinite ease-in-out;
+}
+
+.loader .dot:nth-child(2) { animation-delay: 0.15s; }
+.loader .dot:nth-child(3) { animation-delay: 0.3s; }
+
+@keyframes bounce {
+  0%, 80%, 100% { transform: translateY(0); opacity: .6; }
+  40% { transform: translateY(-8px); opacity: 1; }
+}
+
+.loading-text {
+  text-align: center;
+  font-weight: 600;
+  letter-spacing: .02em;
+  color: #e6d7ff;
+}
+
+/* Controls */
+.controls {
+  position: absolute;
+  bottom: 16px;
+  right: 16px;
+  display: flex;
+  gap: 8px;
+  z-index: 3;
+}
+
+.ctrl {
+  appearance: none;
+  border: 1px solid rgba(255,255,255,.25);
+  background: rgba(20,20,20,.6);
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font: inherit;
+  cursor: pointer;
+  transition: background .2s ease, border-color .2s ease;
+}
+
+.ctrl:hover { background: rgba(40,40,40,.7); border-color: rgba(255,255,255,.4); }
+.ctrl:active { transform: translateY(1px); }
+
+.footer { display: none; }
+
+/* Desktop centering and scroll friendliness */
+@media (min-width: 1024px) {
+}
+
+/* Make game viewport slightly wider on small screens */
+@media (max-width: 700px) {
+  /* На мобильных: iframe на весь экран, убрать фон */
+  body { background: #000; }
+  .bg { display: none; }
+  .container {
+    min-height: 100dvh;
+    padding: 0;
+    grid-template-rows: 0 1fr 0;
+  }
+  .header, .footer { display: none; }
+  .game-viewport {
+    width: 100vw;
+    aspect-ratio: auto;
+    border-radius: 0;
+    box-shadow: none;
+    background: #000;
+  }
+  .game-viewport iframe {
+    width: 100vw;
+    height: 100dvh;
+  }
+}
+
+
+
+
