@@ -7,8 +7,66 @@
       // Set a light/dark theme class on body if needed
       var theme = tg.colorScheme || 'light';
       document.documentElement.setAttribute('data-theme', theme);
+      
+      // Делаем Telegram WebApp доступным глобально для Unity
+      window.TelegramWebApp = tg;
+      
+      // Функции для работы с API
+      window.GameAPI = {
+        // Получить баланс пользователя
+        getUserBalance: function(callback) {
+          if (!tg.initDataUnsafe.user) {
+            callback({success: false, error: "No user data"});
+            return;
+          }
+          
+          var userId = tg.initDataUnsafe.user.id;
+          var apiUrl = window.location.origin + '/api/user/balance?user_id=' + userId + '&auth_date=' + Date.now();
+          
+          fetch(apiUrl)
+            .then(response => response.json())
+            .then(data => callback(data))
+            .catch(error => callback({success: false, error: error.message}));
+        },
+        
+        // Потратить монеты
+        spendCoins: function(amount, callback) {
+          if (!tg.initDataUnsafe.user) {
+            callback({success: false, error: "No user data"});
+            return;
+          }
+          
+          var userId = tg.initDataUnsafe.user.id;
+          var apiUrl = window.location.origin + '/api/user/spend?user_id=' + userId + '&amount=' + amount + '&auth_date=' + Date.now();
+          
+          fetch(apiUrl)
+            .then(response => response.json())
+            .then(data => callback(data))
+            .catch(error => callback({success: false, error: error.message}));
+        },
+        
+        // Показать кнопку покупки монет
+        showBuyCoinsButton: function() {
+          if (tg.MainButton) {
+            tg.MainButton.setText("💰 Купить монеты");
+            tg.MainButton.show();
+            tg.MainButton.onClick(function() {
+              tg.close();
+            });
+          }
+        },
+        
+        // Скрыть кнопку покупки монет
+        hideBuyCoinsButton: function() {
+          if (tg.MainButton) {
+            tg.MainButton.hide();
+          }
+        }
+      };
     }
-  } catch (e) {}
+  } catch (e) {
+    console.error('Telegram WebApp initialization error:', e);
+  }
   function setViewportUnit() {
     var vh = window.innerHeight * 0.01;
     document.documentElement.style.setProperty('--vh', vh + 'px');
