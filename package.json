@@ -4,13 +4,17 @@
   "version": "1.0.0",
   "description": "Frontend + Unity WebGL server for Render",
   "scripts": {
-    "dev": "node server.js",
-    "start": "node server.js"
+    "dev": "concurrently --names=\"FRONTEND,BACKEND\" --prefix-colors=\"blue,green\" \"npm run frontend\" \"npm run backend\"",
+    "start": "concurrently --names=\"FRONTEND,BACKEND\" --prefix-colors=\"blue,green\" \"npm run frontend\" \"npm run backend\"",
+    "frontend": "node server.js",
+    "backend": "node start_backend.js",
+    "bot": "python backend/bot.py"
   },
   "dependencies": {
-    "express": "^5.1.0"
+    "express": "^5.1.0",
+    "http-proxy-middleware": "^3.0.5"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  }
 }
-
-

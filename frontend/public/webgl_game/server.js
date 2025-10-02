@@ -84,6 +84,6 @@ app.use(express.static(path.join(__dirname)));
 
 app.listen(port, () => {
 
-  console.log(`✅ Сервер запущен: http://localhost:${port}`);
+  console.log(`[OK] Сервер запущен: http://localhost:${port}`);
 
 });

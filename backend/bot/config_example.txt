@@ -1,0 +1,13 @@
+# Переименуйте этот файл в .env и заполните своими данными
+
+# Telegram Bot Configuration
+BOT_TOKEN=your_bot_token_here
+
+# WebApp URL (ваш домен где развернуто приложение)
+WEBAPP_URL=https://your-domain.example
+
+# JWT Secret для API (можно оставить пустым, тогда будет использован BOT_TOKEN)
+JWT_SECRET=
+
+# Payment Provider Token (если нужны платежи)
+PAYMENT_PROVIDER_TOKEN=
