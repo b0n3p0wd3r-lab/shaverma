@@ -2,13 +2,20 @@
 <html lang="ru">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
 <title>SHAVERMA</title>
 <link rel="stylesheet" href="styles.css">
 <link rel="preload" href="public/webgl_game/index.html" as="document">
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 </head>
 <body>
+  <!-- Video Loading Screen -->
+  <div id="videoLoadingScreen" class="video-loading-screen">
+    <video id="loadingVideo" autoplay muted loop playsinline>
+      <source src="public/loding_screen.webm" type="video/webm">
+    </video>
+  </div>
+
   <div class="bg"></div>
   <main class="container">
     <header class="header">

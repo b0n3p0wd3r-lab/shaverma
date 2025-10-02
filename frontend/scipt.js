@@ -1,4 +1,31 @@
 (function() {
+  // Video Loading Screen Logic
+  function initVideoLoadingScreen() {
+    const videoLoadingScreen = document.getElementById('videoLoadingScreen');
+    const loadingVideo = document.getElementById('loadingVideo');
+    
+    if (videoLoadingScreen && loadingVideo) {
+      // Показываем экран загрузки на 5 секунд
+      setTimeout(function() {
+        videoLoadingScreen.classList.add('fade-out');
+        
+        // Полностью скрываем элемент после анимации
+        setTimeout(function() {
+          videoLoadingScreen.style.display = 'none';
+        }, 500); // 500ms - время анимации fade-out
+      }, 5000); // 5 секунд показа видео
+      
+      // Обработка ошибок загрузки видео
+      loadingVideo.addEventListener('error', function() {
+        console.warn('Не удалось загрузить видео загрузки');
+        videoLoadingScreen.style.display = 'none';
+      });
+    }
+  }
+  
+  // Запускаем экран загрузки сразу
+  initVideoLoadingScreen();
+
   try {
     if (window.Telegram && window.Telegram.WebApp) {
       var tg = window.Telegram.WebApp;
@@ -91,6 +118,7 @@
         frame.src = 'http://localhost:3000/public/webgl_game/index.html';
       }
     } catch (e) {}
+    
     frame.addEventListener('load', function() {
       if (overlay) overlay.style.display = 'none';
       try { frame.contentWindow.focus(); } catch (e) {}

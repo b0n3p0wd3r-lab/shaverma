@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=390, height=844, initial-scale=1.0, user-scalable=no">
+    <title>Unity WebGL Player | Shaurmafia</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background: #231F20;
+        width: 390px;
+        height: 844px;
+      }
+      
+      #unity-canvas {
+        display: block;
+        width: 390px !important;
+        height: 844px !important;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background: #231F20;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="unity-canvas" width="390" height="844" tabindex="-1"></canvas>
+    <script src="Build/SHAURMA.loader.js"></script>
+    <script>
+      // Принудительно устанавливаем мобильные размеры
+      var canvas = document.querySelector("#unity-canvas");
+      
+      // Фиксированные мобильные размеры
+      canvas.width = 390;
+      canvas.height = 844;
+      canvas.style.width = "390px";
+      canvas.style.height = "844px";
+      
+      // Применяем мобильные стили
+      document.body.style.width = "390px";
+      document.body.style.height = "844px";
+      document.body.style.overflow = "hidden";
+      document.body.style.margin = "0";
+      document.body.style.padding = "0";
+
+      createUnityInstance(canvas, {
+        dataUrl: "Build/SHAURMA.data.br",
+        frameworkUrl: "Build/SHAURMA.framework.js.br",
+        codeUrl: "Build/SHAURMA.wasm.br",
+        streamingAssetsUrl: "StreamingAssets",
+        companyName: "DefaultCompany",
+        productName: "Shaurmafia",
+        productVersion: "0.1.0",
+        matchWebGLToCanvasSize: true,
+        devicePixelRatio: 1,
+      }).then((unityInstance) => {
+        console.log('Unity loaded with fixed mobile dimensions: 390x844');
+        
+        // Отправляем сообщение Unity о мобильном режиме
+        try {
+          unityInstance.SendMessage('GameManager', 'SetMobileMode', 'true');
+        } catch (e) {
+          console.log('Unity message sending failed (normal if GameManager not exists)');
+        }
+      }).catch((message) => {
+        console.error('Unity loading failed:', message);
+      });
+    </script>
+  </body>
+</html>
